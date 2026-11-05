@@ -1,69 +1,287 @@
-import Image from "next/image";
+import Link from "next/link";
+import Polaroid from "@/components/Polaroid";
+import ProductCard from "@/components/ProductCard";
+import Reviews from "@/components/Reviews";
+import Sparkle from "@/components/Sparkle";
+import TiramisuArt from "@/components/TiramisuArt";
+import { gallery, products, promos, shop } from "@/lib/products";
+import ingredients from "@/public/images/ingredients.jpg";
+import kitchenFridge from "@/public/images/kitchen-fridge.jpg";
+
+const features = [
+  { icon: "🧀", title: "Mascarpone Tatua", text: "Kem mascarpone kiểu Ý từ New Zealand, béo mịn tan ngay đầu lưỡi." },
+  { icon: "🍪", title: "Bánh Vicenzovo Ý", text: "Ladyfinger nhập khẩu, thấm cà phê vừa đủ mà không bị nhão." },
+  { icon: "🏠", title: "Nhà làm mẻ nhỏ", text: "Làm tay từng hộp, để lạnh cho kem set lại rồi mới giao." },
+  { icon: "🛵", title: "Freeship gần nhà", text: "Dưới 3km freeship. Xa hơn chỉ cần mua từ 2 bánh." },
+];
+
+const steps = [
+  { n: "01", title: "Nhúng bánh", text: "Ladyfinger nhúng nhanh qua cà phê để thấm vừa." },
+  { n: "02", title: "Đánh kem", text: "Mascarpone cùng whipping cream đánh bông mềm mịn." },
+  { n: "03", title: "Xếp từng lớp", text: "Bắt kem bằng túi bắt, xếp xen kẽ thật đều tay." },
+  { n: "04", title: "Phủ cacao", text: "Rây cacao thật dày, thêm marshmallow rồi để lạnh." },
+];
 
 export default function Home() {
+  const signature = products[0];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="dotted-bg absolute inset-0 opacity-50" aria-hidden="true" />
+        <div className="absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full bg-bubble/50 blur-3xl" aria-hidden="true" />
+        <div className="absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-petal blur-3xl" aria-hidden="true" />
+
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-12 sm:px-6 md:grid-cols-2 md:pt-16">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border-2 border-bubble bg-white px-4 py-1.5 text-sm font-bold text-berry">
+              <span className="animate-wiggle inline-block">🎁</span> Mua từ 3 hộp tặng kèm 1 flan
+            </span>
+            <h1 className="mt-6 font-display text-5xl font-extrabold leading-[1.05] text-cocoa sm:text-6xl lg:text-7xl">
+              Ngọt ngào
+              <br />
+              từng lớp{" "}
+              <span className="relative inline-block text-berry">
+                kem mây
+                <svg viewBox="0 0 200 20" className="absolute -bottom-2 left-0 w-full" aria-hidden="true">
+                  <path d="M2 14 Q50 2 100 12 T198 8" stroke="#FFC2D4" strokeWidth="7" fill="none" strokeLinecap="round" />
+                </svg>
+              </span>
+            </h1>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-cocoa-soft">
+              <strong className="text-cocoa">Tiramisu Hg</strong> là tiệm bánh nhà làm nho nhỏ ở Tân Hưng, Quận 7 —
+              nơi mỗi hộp tiramisu đều được xếp lớp bằng tay và phủ thật nhiều yêu thương 💕
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="#menu"
+                className="rounded-full bg-berry px-7 py-3.5 font-bold text-white shadow-[0_5px_0_#c23d6c] transition hover:-translate-y-0.5 hover:shadow-[0_7px_0_#c23d6c] active:translate-y-1 active:shadow-[0_1px_0_#c23d6c]"
+              >
+                Xem menu bánh
+              </Link>
+              <Link
+                href={`/banh/${signature.slug}`}
+                className="rounded-full border-2 border-cocoa/15 bg-white px-7 py-3.5 font-bold text-cocoa transition hover:border-candy hover:text-berry"
+              >
+                Tiramisu 45k →
+              </Link>
+            </div>
+            <dl className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
+              {[
+                ["45k", "một hộp tiramisu"],
+                ["< 3km", "freeship tận nơi"],
+                ["Q.7", "Phường Tân Hưng"],
+              ].map(([v, l]) => (
+                <div key={l}>
+                  <dt className="font-display text-3xl font-extrabold text-berry">{v}</dt>
+                  <dd className="text-xs font-semibold text-cocoa-soft">{l}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* Ảnh thật + linh vật */}
+          <div className="relative mx-auto aspect-square w-full max-w-md">
+            <div className="absolute inset-4 rounded-full bg-gradient-to-br from-bubble to-candy" aria-hidden="true" />
+            <div className="absolute inset-10 rounded-full border-4 border-dashed border-white/70" aria-hidden="true" />
+            <Polaroid
+              photo={gallery[1]}
+              aspect="aspect-[5/4]"
+              preload
+              sizes="(min-width: 768px) 340px, 75vw"
+              className="absolute left-[4%] top-[6%] w-[74%] -rotate-6"
+            />
+            <Polaroid
+              photo={gallery[3]}
+              tape={false}
+              sizes="(min-width: 768px) 180px, 40vw"
+              className="absolute bottom-[2%] right-0 w-[42%] rotate-[7deg] p-2"
+            />
+            <TiramisuArt id="hero" className="animate-float absolute -bottom-4 -left-8 z-20 w-[36%] drop-shadow-[0_14px_16px_rgba(194,61,108,0.35)]" />
+            <Sparkle className="animate-twinkle absolute -left-2 top-4 h-8 w-8" />
+            <Sparkle className="animate-twinkle absolute right-2 top-[38%] h-6 w-6 [animation-delay:0.8s]" color="#E85A8A" />
+            <Sparkle className="animate-twinkle absolute right-[30%] -top-2 h-5 w-5 [animation-delay:1.4s]" color="#FFC94D" />
+            <div className="absolute -right-2 top-[4%] z-20 flex h-20 w-20 rotate-12 flex-col items-center justify-center rounded-full bg-berry text-white shadow-lg">
+              <span className="font-display text-2xl font-extrabold leading-none">45k</span>
+              <span className="text-[10px] font-bold">/ hộp</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Marquee */}
+      <div className="overflow-hidden border-y-2 border-candy bg-candy py-3 text-white" aria-hidden="true">
+        <div className="animate-marquee flex w-max gap-8 whitespace-nowrap font-display text-xl font-bold">
+          {Array.from({ length: 4 }).flatMap((_, k) =>
+            [...products.map((p) => p.name), "Freeship dưới 3km", "Mua 3 tặng 1 flan"].map((t, i) => (
+              <span key={`${k}-${i}`} className="flex items-center gap-8">
+                {t} <span>✿</span>
+              </span>
+            )),
+          )}
+        </div>
+      </div>
+
+      {/* Features */}
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((f) => (
+            <div key={f.title} className="rounded-3xl bg-white p-6 shadow-[0_8px_30px_-12px_rgba(232,90,138,0.25)]">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-petal text-3xl">{f.icon}</div>
+              <h3 className="mt-4 font-display text-lg font-bold text-cocoa">{f.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-cocoa-soft">{f.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Menu */}
+      <section id="menu" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <div className="text-center">
+          <p className="font-display text-lg font-bold text-candy">✿ Menu của tiệm ✿</p>
+          <h2 className="mt-1 font-display text-4xl font-extrabold text-cocoa sm:text-5xl">Chọn món bạn thương</h2>
+          <p className="mx-auto mt-3 max-w-lg text-cocoa-soft">
+            Tiramisu là “nhân vật chính”, nhưng panna cotta và flan cũng xinh xỉu không kém đâu nha.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {products.map((p) => (
+            <ProductCard key={p.slug} product={p} />
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Promos */}
+      <section id="uu-dai" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div className="text-center">
+          <p className="font-display text-lg font-bold text-candy">✿ Ưu đãi xinh ✿</p>
+          <h2 className="mt-1 font-display text-4xl font-extrabold text-cocoa sm:text-5xl">Mua nhiều, tặng nhiều</h2>
+        </div>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {promos.map((p, i) => (
+            <div
+              key={p.title}
+              className={`relative rounded-3xl border-2 border-dashed border-candy bg-white p-6 text-center ${i % 2 ? "lg:translate-y-4" : ""}`}
+            >
+              <span className="absolute -left-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full bg-blush" aria-hidden="true" />
+              <span className="absolute -right-3 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full bg-blush" aria-hidden="true" />
+              <div className="text-4xl">{p.icon}</div>
+              <h3 className="mt-3 font-display text-xl font-extrabold text-berry">{p.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-cocoa-soft">{p.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Story */}
+      <section id="story" className="scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-petal px-6 py-14 sm:px-12 md:py-20">
+          <div className="dotted-bg absolute inset-0 opacity-70" aria-hidden="true" />
+          <div className="relative grid items-center gap-12 md:grid-cols-[1fr_1.2fr]">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-sm">
+              <Polaroid
+                photo={{ src: ingredients, alt: "Nguyên liệu làm bánh: mascarpone Tatua, bánh Vicenzovo, whipping cream Anchor, sữa tươi" }}
+                className="absolute left-0 top-0 w-[70%] -rotate-6"
+                sizes="(min-width: 768px) 260px, 65vw"
+              />
+              <Polaroid
+                photo={{ src: kitchenFridge, alt: "Những hộp tiramisu đang được để lạnh trong tủ" }}
+                aspect="aspect-[4/3]"
+                caption="Đang chờ kem set 🧊"
+                className="absolute bottom-0 right-0 w-[72%] rotate-[5deg]"
+                sizes="(min-width: 768px) 270px, 65vw"
+              />
+              <TiramisuArt id="story" variant="cup" className="animate-float absolute -right-6 top-[24%] z-20 w-[32%]" />
+              <Sparkle className="animate-twinkle absolute -top-4 right-6 h-7 w-7" color="#E85A8A" />
+            </div>
+            <div>
+              <p className="font-display text-lg font-bold text-candy">Câu chuyện nhỏ</p>
+              <h2 className="mt-1 font-display text-4xl font-extrabold leading-tight text-cocoa">
+                Từ căn bếp nhỏ
+                <br />
+                ở Quận 7 💕
+              </h2>
+              <p className="mt-5 leading-relaxed text-cocoa-soft">
+                H.G House bắt đầu từ niềm yêu thích làm bánh cho người thân. Tiệm chọn nguyên liệu tử tế —
+                mascarpone Tatua, bánh Vicenzovo của Ý, whipping cream Anchor — và tự tay làm từng mẻ nhỏ để
+                hộp bánh đến tay bạn lúc nào cũng tươi ngon.
+              </p>
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                {steps.map((s) => (
+                  <div key={s.n} className="flex gap-3 rounded-2xl bg-white/80 p-4">
+                    <span className="font-display text-2xl font-extrabold text-bubble">{s.n}</span>
+                    <div>
+                      <h3 className="font-display font-bold text-cocoa">{s.title}</h3>
+                      <p className="text-sm text-cocoa-soft">{s.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Real photo wall */}
+      <section id="hinh-that" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-24 sm:px-6">
+        <div className="text-center">
+          <p className="font-display text-lg font-bold text-candy">✿ Hình thật, không filter quá đà ✿</p>
+          <h2 className="mt-1 font-display text-4xl font-extrabold text-cocoa sm:text-5xl">Góc bếp H.G House</h2>
+        </div>
+        <div className="mt-12 grid grid-cols-2 gap-5 md:grid-cols-4">
+          {gallery.map((g, i) => (
+            <Polaroid
+              key={g.alt}
+              photo={g}
+              tape={i % 2 === 0}
+              className={["-rotate-3", "rotate-2 md:translate-y-6", "-rotate-2", "rotate-3 md:translate-y-6"][i]}
+              sizes="(min-width: 768px) 260px, 45vw"
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section id="danh-gia" className="scroll-mt-20 mx-auto max-w-6xl px-4 pb-24 sm:px-6">
+        <div className="mb-10 text-center">
+          <p className="font-display text-lg font-bold text-candy">✿ Khách nói gì ✿</p>
+          <h2 className="mt-1 font-display text-4xl font-extrabold text-cocoa sm:text-5xl">Lời thương gửi tiệm</h2>
+        </div>
+        <Reviews />
+      </section>
+
+      {/* CTA / Contact */}
+      <section id="contact" className="scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-candy to-berry px-6 py-14 text-center text-white sm:px-12">
+          <Sparkle className="animate-twinkle absolute left-8 top-8 h-8 w-8" color="#fff" />
+          <Sparkle className="animate-twinkle absolute bottom-10 right-12 h-6 w-6 [animation-delay:1s]" color="#FFE4EC" />
+          <TiramisuArt id="cta" className="animate-float mx-auto -mt-4 w-28" />
+          <h2 className="font-display text-4xl font-extrabold sm:text-5xl">Thèm tiramisu rồi đúng không? 🥺</h2>
+          <p className="mx-auto mt-3 max-w-xl text-white/90">
+            Nhắn Zalo hoặc gọi cho tiệm để đặt bánh nha. {shop.shipping}.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href={shop.zalo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-white px-7 py-3.5 font-bold text-berry shadow-[0_5px_0_#c23d6c] transition hover:-translate-y-0.5"
+            >
+              💬 Zalo {shop.phone}
+            </a>
+            <a href={shop.tel} className="rounded-full border-2 border-white px-7 py-3.5 font-bold text-white transition hover:bg-white/15">
+              📞 Gọi ngay
+            </a>
+          </div>
+          <p className="mt-6 text-sm text-white/85">
+            📍 {shop.area} · 💗 Facebook:{" "}
+            <a href={shop.facebookUrl} target="_blank" rel="noopener noreferrer" className="font-bold underline underline-offset-4 hover:text-white">
+              {shop.facebook}
+            </a>
+          </p>
+        </div>
+      </section>
+    </>
   );
 }
