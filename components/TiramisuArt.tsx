@@ -1,19 +1,31 @@
-/** Linh vật Tiramisu Hg: lát/hũ tiramisu kawaii phủ cacao + marshmallow. */
+/** Linh vật Tiramisu Hg: lát/hũ tiramisu kawaii phủ cacao, cắm Oreo + hoa. */
 type Props = {
   id: string;
   variant?: "slice" | "cup";
   face?: boolean;
   className?: string;
+  /** Tốc độ parallax (xem components/Motion.tsx) */
+  parallax?: number;
 };
 
 const palette = { top: "#7B4B3A", cream: "#FFF1C9", sponge: "#D9A86C" };
 
-function Marshmallows({ x, y }: { x: number; y: number }) {
+/** Nửa bánh Oreo cắm trên mặt + bông hoa nhỏ — giống topping thật của tiệm. */
+function OreoDaisy({ x, y }: { x: number; y: number }) {
   return (
     <g transform={`translate(${x} ${y})`}>
-      <rect x="-22" y="-4" width="16" height="11" rx="4" fill="#fff" stroke="#EADCD6" strokeWidth="1" transform="rotate(-18 -14 1)" />
-      <rect x="-6" y="-9" width="16" height="11" rx="4" fill="#fff" stroke="#EADCD6" strokeWidth="1" transform="rotate(8 2 -4)" />
-      <rect x="8" y="-2" width="16" height="11" rx="4" fill="#fff" stroke="#EADCD6" strokeWidth="1" transform="rotate(-6 16 3)" />
+      <g transform="translate(-8 0) rotate(-8)">
+        <path d="M-17 4 A17 17 0 0 1 17 4Z" fill="#2A1C1B" />
+        <path d="M-12 4 A12 12 0 0 1 12 4" fill="none" stroke="#4A3533" strokeWidth="1.3" />
+        <path d="M-6 4 A6 6 0 0 1 6 4" fill="none" stroke="#4A3533" strokeWidth="1.1" />
+        <rect x="-17" y="2.5" width="34" height="3" fill="#FFF8EE" />
+      </g>
+      <g transform="translate(16 6)">
+        {Array.from({ length: 8 }, (_, i) => (
+          <ellipse key={i} cx="0" cy="-4" rx="2" ry="4" fill="#fff" transform={`rotate(${i * 45})`} />
+        ))}
+        <circle r="2.4" fill="#FFC94D" />
+      </g>
     </g>
   );
 }
@@ -42,12 +54,12 @@ function Dust({ x, w, y, h, color }: { x: number; w: number; y: number; h: numbe
   );
 }
 
-export default function TiramisuArt({ id, variant = "slice", face = true, className }: Props) {
+export default function TiramisuArt({ id, variant = "slice", face = true, className, parallax }: Props) {
   const clip = `clip-${id}-${variant}`;
 
   if (variant === "cup") {
     return (
-      <svg viewBox="0 0 200 200" className={className} role="img" aria-hidden="true">
+      <svg viewBox="0 0 200 200" className={className} role="img" aria-hidden="true" data-parallax={parallax}>
         <defs>
           <clipPath id={clip}>
             <rect x="46" y="62" width="108" height="114" rx="14" />
@@ -66,13 +78,13 @@ export default function TiramisuArt({ id, variant = "slice", face = true, classN
         <path d="M56 74 L56 162" stroke="#fff" strokeWidth="4" strokeLinecap="round" opacity="0.5" />
         <rect x="40" y="54" width="120" height="10" rx="5" fill="#fff" opacity="0.85" />
         {face && <Face cx={100} cy={128} />}
-        <Marshmallows x={100} y={46} />
+        <OreoDaisy x={100} y={58} />
       </svg>
     );
   }
 
   return (
-    <svg viewBox="0 0 200 200" className={className} role="img" aria-hidden="true">
+    <svg viewBox="0 0 200 200" className={className} role="img" aria-hidden="true" data-parallax={parallax}>
       <defs>
         <clipPath id={clip}>
           <rect x="38" y="70" width="124" height="98" rx="16" />
@@ -91,7 +103,7 @@ export default function TiramisuArt({ id, variant = "slice", face = true, classN
         <rect x="38" y="70" width="10" height="98" fill="#fff" opacity="0.18" />
       </g>
       {face && <Face cx={100} cy={132} />}
-      <Marshmallows x={100} y={64} />
+      <OreoDaisy x={100} y={67} />
     </svg>
   );
 }

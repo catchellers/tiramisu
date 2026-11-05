@@ -3,29 +3,18 @@ import { reviewsFor } from "@/lib/reviews";
 
 const tints = ["#FFE4EC", "#FFF0C7", "#E9F5DC", "#FCE3D6", "#EFE6F5", "#FFE4EC"];
 
+/** Review thật của khách + nút sang Facebook. Chưa có review thì chỉ hiện nút. */
 export default function Reviews({ slug }: { slug?: string }) {
   const list = reviewsFor(slug);
-  const hasSamples = list.some((r) => r.sample);
 
   return (
     <div>
-      {hasSamples && (
-        <p className="mx-auto mb-8 max-w-xl rounded-2xl border-2 border-dashed border-bubble bg-white px-4 py-3 text-center text-sm font-semibold text-cocoa-soft">
-          🌸 Tiệm đang tổng hợp đánh giá thật từ khách — các thẻ gắn nhãn “Mẫu” chỉ là bản xem trước.
-        </p>
-      )}
-
       {list.length > 0 && (
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mb-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {list.map((r, i) => {
             const product = products.find((p) => p.slug === r.product);
             return (
-              <figure key={i} className="relative rounded-3xl p-6" style={{ backgroundColor: tints[i % tints.length] }}>
-                {r.sample && (
-                  <span className="absolute right-4 top-4 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-cocoa-soft">
-                    Mẫu
-                  </span>
-                )}
+              <figure key={i} className="rounded-3xl p-6" style={{ backgroundColor: tints[i % tints.length] }}>
                 <div className="text-candy" aria-label={`${r.rating} trên 5 sao`}>
                   {"★".repeat(r.rating)}
                   <span className="text-white">{"★".repeat(5 - r.rating)}</span>
@@ -48,14 +37,14 @@ export default function Reviews({ slug }: { slug?: string }) {
         </div>
       )}
 
-      <div className="mt-10 text-center">
+      <div className="text-center">
         <a
           href={shop.facebookUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full border-2 border-candy bg-white px-6 py-3 font-bold text-berry transition hover:bg-petal"
         >
-          💗 Xem phản hồi của khách trên Facebook
+          💗 Xem khách nói gì trên Facebook
         </a>
       </div>
     </div>

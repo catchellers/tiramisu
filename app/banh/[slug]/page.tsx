@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Motion from "@/components/Motion";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import ProductCard from "@/components/ProductCard";
 import ProductGallery from "@/components/ProductGallery";
 import PurchasePanel from "@/components/PurchasePanel";
+import OwnerNote from "@/components/OwnerNote";
 import Reviews from "@/components/Reviews";
-import { formatPrice, fromPrice, getProduct, products, promos, shop } from "@/lib/products";
+import { formatPrice, fromPrice, getProduct, products, shop } from "@/lib/products";
+import { reviewsFor } from "@/lib/reviews";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -18,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/banh/[slug]">): P
   if (!product) return {};
   return {
     title: product.name,
-    description: `${product.tagline}. ${formatPrice(fromPrice(product))}/${product.unit} — ${shop.area}.`,
+    description: `${product.tagline}. ${fromPrice(product) === null ? "" : `${formatPrice(fromPrice(product))}/${product.unit} — `}${shop.area}.`,
   };
 }
 
@@ -77,14 +80,9 @@ async function ProductContent({ params }: Pick<PageProps<"/banh/[slug]">, "param
           <p className="mt-4 font-display text-3xl font-extrabold text-berry">
             {product.options.length > 1 && <span className="text-lg text-cocoa-soft">từ </span>}
             {formatPrice(fromPrice(product))}{" "}
-            <span className="text-base font-semibold text-cocoa-soft">/ {product.unit}</span>
+            {fromPrice(product) !== null && <span className="text-base font-semibold text-cocoa-soft">/ {product.unit}</span>}
           </p>
 
-          {product.promo && (
-            <p className="mt-4 inline-flex items-center gap-2 rounded-full border-2 border-dashed border-candy bg-white px-4 py-1.5 text-sm font-bold text-berry">
-              🎁 {product.promo}
-            </p>
-          )}
 
           <div className="mt-6 space-y-3 leading-relaxed text-cocoa-soft">
             {product.description.map((d) => (
@@ -93,12 +91,7 @@ async function ProductContent({ params }: Pick<PageProps<"/banh/[slug]">, "param
           </div>
 
           <div className="mt-8">
-            <PurchasePanel
-              name={product.name}
-              unit={product.unit}
-              options={product.options}
-              freeFlanAt={isTiramisu ? 3 : undefined}
-            />
+            <PurchasePanel name={product.name} options={product.options} />
           </div>
 
           <ul className="mt-8 grid grid-cols-3 gap-3 text-center text-xs font-semibold text-cocoa-soft">
@@ -110,7 +103,7 @@ async function ProductContent({ params }: Pick<PageProps<"/banh/[slug]">, "param
       </section>
 
       <section className="mt-20 grid gap-6 lg:grid-cols-3">
-        <div className="rounded-[2rem] bg-white p-7">
+        <div data-aos="fade-up" className="rounded-[2rem] bg-white p-7">
           <h2 className="font-display text-2xl font-bold text-cocoa">Thành phần 🧺</h2>
           <ul className="mt-4 flex flex-wrap gap-2">
             {product.ingredients.map((i) => (
@@ -120,7 +113,7 @@ async function ProductContent({ params }: Pick<PageProps<"/banh/[slug]">, "param
             ))}
           </ul>
         </div>
-        <div className="rounded-[2rem] bg-white p-7">
+        <div data-aos="fade-up" data-aos-delay="100" className="rounded-[2rem] bg-white p-7">
           <h2 className="font-display text-2xl font-bold text-cocoa">Hương vị 👅</h2>
           <dl className="mt-4 space-y-3">
             {product.taste.map((t) => (
@@ -138,7 +131,7 @@ async function ProductContent({ params }: Pick<PageProps<"/banh/[slug]">, "param
             ))}
           </dl>
         </div>
-        <div className="rounded-[2rem] bg-petal p-7">
+        <div data-aos="fade-up" data-aos-delay="200" className="rounded-[2rem] bg-petal p-7">
           <h2 className="font-display text-2xl font-bold text-cocoa">Bảo quản 🧊</h2>
           <p className="mt-4 leading-relaxed text-cocoa-soft">{product.storage}</p>
           <p className="mt-3 text-sm leading-relaxed text-cocoa-soft">
@@ -147,34 +140,30 @@ async function ProductContent({ params }: Pick<PageProps<"/banh/[slug]">, "param
         </div>
       </section>
 
+      <section id="danh-gia" className="mt-20 scroll-mt-20">
+        <h2 data-aos="fade-up" className="mb-8 font-display text-3xl font-extrabold text-cocoa sm:text-4xl">Chủ tiệm nói nhỏ nè 🤫</h2>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <OwnerNote product={product} link={false} className="max-w-3xl" />
+        </div>
+        {reviewsFor(product.slug).length > 0 && (
+          <>
+            <h2 className="mb-8 mt-16 font-display text-3xl font-extrabold text-cocoa sm:text-4xl">Khách nói gì về {product.short} 💬</h2>
+            <Reviews slug={product.slug} />
+          </>
+        )}
+      </section>
+
       <section className="mt-20">
-        <h2 className="font-display text-3xl font-extrabold text-cocoa sm:text-4xl">Ưu đãi đang có 🎀</h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {promos.map((p) => (
-            <div key={p.title} className="flex gap-3 rounded-3xl border-2 border-dashed border-candy bg-white p-5">
-              <span className="text-3xl">{p.icon}</span>
-              <div>
-                <h3 className="font-display font-bold text-berry">{p.title}</h3>
-                <p className="text-sm text-cocoa-soft">{p.text}</p>
-              </div>
+        <h2 data-aos="fade-up" className="font-display text-3xl font-extrabold text-cocoa">Ăn kèm cho trọn vị 💕</h2>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {related.map((p, i) => (
+            <div key={p.slug} data-aos="zoom-in-up" data-aos-delay={i * 120}>
+              <ProductCard product={p} />
             </div>
           ))}
         </div>
       </section>
-
-      <section id="danh-gia" className="mt-20 scroll-mt-20">
-        <h2 className="mb-8 font-display text-3xl font-extrabold text-cocoa sm:text-4xl">Khách nói gì về {product.short} 💬</h2>
-        <Reviews slug={product.slug} />
-      </section>
-
-      <section className="mt-20">
-        <h2 className="font-display text-3xl font-extrabold text-cocoa">Ăn kèm cho trọn vị 💕</h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {related.map((p) => (
-            <ProductCard key={p.slug} product={p} />
-          ))}
-        </div>
-      </section>
+      <Motion />
     </>
   );
 }

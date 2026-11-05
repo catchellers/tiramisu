@@ -3,16 +3,15 @@
 import { useEffect, useState } from "react";
 import { formatPrice, shop, type Option } from "@/lib/products";
 
-type Props = { name: string; unit: string; options: Option[]; freeFlanAt?: number };
+type Props = { name: string; options: Option[] };
 
-export default function PurchasePanel({ name, unit, options, freeFlanAt }: Props) {
+export default function PurchasePanel({ name, options }: Props) {
   const [optionId, setOptionId] = useState(options[0].id);
   const [qty, setQty] = useState(1);
   const [toast, setToast] = useState<string | null>(null);
 
   const option = options.find((o) => o.id === optionId) ?? options[0];
-  const total = option.price * qty;
-  const gotFlan = freeFlanAt !== undefined && qty >= freeFlanAt;
+  const total = option.price === null ? null : option.price * qty;
 
   useEffect(() => {
     if (!toast) return;
@@ -21,7 +20,8 @@ export default function PurchasePanel({ name, unit, options, freeFlanAt }: Props
   }, [toast]);
 
   async function order() {
-    const message = `Chào tiệm, mình muốn đặt: ${qty} × ${name} (${option.label}) — ${formatPrice(total)}. Giao đến: `;
+    const price = total === null ? "" : ` — ${formatPrice(total)}`;
+    const message = `Chào tiệm, mình muốn đặt: ${qty} × ${name} (${option.label})${price}. Giao đến: `;
     try {
       await navigator.clipboard.writeText(message);
       setToast("Đã copy đơn hàng 💕 Dán vào Zalo gửi tiệm nha!");
@@ -85,16 +85,13 @@ export default function PurchasePanel({ name, unit, options, freeFlanAt }: Props
           onClick={order}
           className="h-14 flex-1 rounded-full bg-berry px-6 font-bold text-white shadow-[0_5px_0_#c23d6c] transition hover:-translate-y-0.5 hover:shadow-[0_7px_0_#c23d6c] active:translate-y-1 active:shadow-[0_1px_0_#c23d6c]"
         >
-          💬 Đặt qua Zalo · {formatPrice(total)}
+          💬 Đặt qua Zalo{total !== null && ` · ${formatPrice(total)}`}
         </button>
       </div>
 
-      <p className={`mt-3 text-sm font-semibold ${gotFlan ? "text-berry" : "text-cocoa-soft"}`}>
-        {freeFlanAt === undefined
-          ? `Hoặc gọi ${shop.phone} để đặt nhanh nhé.`
-          : gotFlan
-            ? "🎉 Yay! Đơn này được tặng kèm 1 hũ flan."
-            : `🎁 Mua thêm ${freeFlanAt - qty} ${unit} nữa để được tặng 1 hũ flan.`}
+      <p className="mt-3 text-sm font-semibold text-cocoa-soft">
+        {total === null ? "Giá đang cập nhật, nhắn Zalo hoặc gọi " : "Hoặc gọi "}
+        <a href={shop.tel} className="text-berry hover:underline">{shop.phone}</a> để đặt nhanh nhé.
       </p>
 
       {toast && (

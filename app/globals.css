@@ -73,3 +73,31 @@ body {
   .animate-float, .animate-wiggle, .animate-twinkle, .animate-marquee { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ───────────── Scroll motion ─────────────
+ * Section reveals use AOS (data-aos, initialised in components/Motion.tsx).
+ * Parallax: elements with data-parallax are moved via `translate` (compositor-only).
+ * The hero does NOT use AOS, because AOS hides elements (opacity 0) until JS runs,
+ * which would delay LCP. Only a light transform-only entrance runs there.
+ */
+@keyframes hero-in {
+  from { transform: translateY(28px); }
+  to { transform: none; }
+}
+@keyframes hero-pop {
+  from { transform: scale(0.9) rotate(-2deg); }
+  to { transform: none; }
+}
+
+[data-parallax] { will-change: translate; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-in {
+    animation: hero-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--d, 0) * 90ms);
+  }
+  .hero-d1 { --d: 1; }
+  .hero-d2 { --d: 2; }
+  .hero-d3 { --d: 3; }
+  .hero-pop { animation: hero-pop 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+}

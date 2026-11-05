@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · Tiramisu Hg",
   },
   description:
-    "Tiramisu Hg (H.G House) — tiramisu, panna cotta và flan nhà làm ở Tân Hưng, Quận 7. Tiramisu 45k/hộp, freeship dưới 3km.",
+    "Tiramisu Hg (H.G House) — tiramisu nhà làm và lục trà sữa xoài đào ở Tân Hưng, Quận 7. Tiramisu 45k/hộp, freeship dưới 3km.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

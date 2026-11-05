@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import DessertArt from "./DessertArt";
 import { formatPrice, fromPrice, type Product } from "@/lib/products";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product, className = "" }: { product: Product; className?: string }) {
   const photo = product.photos[0];
   const many = product.options.length > 1;
 
@@ -11,28 +10,17 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link
       href={`/banh/${product.slug}`}
       prefetch={true}
-      className="group relative flex flex-col rounded-[2rem] border-2 border-bubble/60 bg-white p-3.5 transition duration-300 hover:-translate-y-1.5 hover:border-candy hover:shadow-[0_18px_40px_-18px_rgba(232,90,138,0.55)]"
+      className={`group relative flex h-full flex-col rounded-[2rem] border-2 border-bubble/60 bg-white p-3.5 transition duration-300 hover:-translate-y-1.5 hover:border-candy hover:shadow-[0_18px_40px_-18px_rgba(232,90,138,0.55)] ${className}`}
     >
       <div className="relative aspect-square overflow-hidden rounded-[1.5rem]" style={{ backgroundColor: product.bg }}>
-        {product.art ? (
-          <>
-            <div className="dotted-bg absolute inset-0 opacity-60" aria-hidden="true" />
-            <DessertArt
-              kind={product.art}
-              id={`card-${product.slug}`}
-              className="absolute inset-[8%] transition duration-500 group-hover:-rotate-3 group-hover:scale-110"
-            />
-          </>
-        ) : (
-          <Image
-            src={photo.src}
-            alt={photo.alt}
-            fill
-            sizes="(min-width: 1024px) 270px, (min-width: 640px) 45vw, 90vw"
-            placeholder="blur"
-            className="object-cover transition duration-500 group-hover:scale-110"
-          />
-        )}
+        <Image
+          src={photo.src}
+          alt={photo.alt}
+          fill
+          sizes="(min-width: 640px) 360px, 90vw"
+          placeholder="blur"
+          className="object-cover transition duration-500 group-hover:scale-110"
+        />
         {product.badge && (
           <span className="absolute left-3 top-3 rounded-full bg-white px-3 py-1 text-xs font-bold text-berry shadow-sm">
             {product.badge}
@@ -46,7 +34,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="font-display text-xl font-extrabold text-berry">
             {many && <span className="text-sm font-semibold text-cocoa-soft">từ </span>}
             {formatPrice(fromPrice(product))}
-            <span className="text-sm font-semibold text-cocoa-soft"> / {product.unit}</span>
+            {fromPrice(product) !== null && <span className="text-sm font-semibold text-cocoa-soft"> / {product.unit}</span>}
           </span>
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-petal text-lg text-berry transition group-hover:bg-berry group-hover:text-white">
             →

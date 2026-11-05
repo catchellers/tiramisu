@@ -4,7 +4,6 @@ import { shop } from "@/lib/products";
 
 const links = [
   { href: "/#menu", label: "Menu" },
-  { href: "/#uu-dai", label: "Ưu đãi" },
   { href: "/#story", label: "Câu chuyện" },
   { href: "/#danh-gia", label: "Đánh giá" },
   { href: "/#contact", label: "Liên hệ" },
@@ -12,7 +11,7 @@ const links = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-bubble/50 bg-blush/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-bubble/50 bg-blush/95 shadow-[0_2px_12px_-6px_rgba(232,90,138,0.25)]">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2" aria-label={`${shop.name} - Trang chủ`}>
           <Logo className="h-10 w-10" />

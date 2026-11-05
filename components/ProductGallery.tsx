@@ -38,7 +38,7 @@ export default function ProductGallery({ slug, photos, bg, badge, mascot }: Prop
           />
         )}
         {mascot && (
-          <TiramisuArt id={`detail-${slug}`} className="animate-float absolute -bottom-3 -right-3 z-10 w-[32%] drop-shadow-[0_12px_14px_rgba(91,58,51,0.3)]" />
+          <TiramisuArt id={`detail-${slug}`} className="animate-float absolute -bottom-3 -right-3 z-10 w-[32%]" />
         )}
         <Sparkle className="animate-twinkle absolute left-6 top-16 z-10 h-7 w-7" color="#fff" />
         {badge && (

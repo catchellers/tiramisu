@@ -13,7 +13,7 @@ export default function Footer() {
             <span className="font-display text-2xl font-extrabold">Tiramisu Hg</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/85">
-            Tiệm bánh nhà làm nhỏ xinh ở Quận 7. Tiramisu, panna cotta và flan được làm tay theo từng
+            Tiệm bánh nhà làm nhỏ xinh ở Quận 7. Tiramisu và trà sữa xoài đào được làm tay theo từng
             mẻ nhỏ, gói ghém cẩn thận gửi đến bạn.
           </p>
         </div>
