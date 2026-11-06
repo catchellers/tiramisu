@@ -10,6 +10,7 @@ import OwnerNote from "@/components/OwnerNote";
 import Reviews from "@/components/Reviews";
 import { formatPrice, fromPrice, getProduct, products, shop } from "@/lib/products";
 import { reviewsFor } from "@/lib/reviews";
+import { pageUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -20,6 +21,12 @@ export async function generateMetadata({ params }: PageProps<"/banh/[slug]">): P
   const product = getProduct(slug);
   if (!product) return {};
   return {
+    ...pageUrl(`/banh/${product.slug}`, {
+      url: product.photos[0].src.src,
+      width: product.photos[0].src.width,
+      height: product.photos[0].src.height,
+      alt: product.photos[0].alt,
+    }),
     title: product.name,
     description: `${product.tagline}. ${fromPrice(product) === null ? "" : `${formatPrice(fromPrice(product))}/${product.unit} — `}${shop.area}.`,
   };

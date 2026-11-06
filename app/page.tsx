@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Motion from "@/components/Motion";
 import Polaroid from "@/components/Polaroid";
@@ -9,6 +10,9 @@ import TiramisuArt from "@/components/TiramisuArt";
 import { gallery, products, shop } from "@/lib/products";
 import ingredients from "@/public/images/ingredients.jpg";
 import kitchenFridge from "@/public/images/kitchen-fridge.jpg";
+import { pageUrl } from "@/lib/seo";
+
+export const metadata: Metadata = pageUrl("/");
 
 const features = [
   { icon: "🧀", title: "Mascarpone Tatua", text: "Kem mascarpone kiểu Ý từ New Zealand, béo mịn tan ngay đầu lưỡi." },

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Baloo_2, Quicksand } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { baseOpenGraph } from "@/lib/seo";
 import "./globals.css";
 
 const display = Baloo_2({
@@ -18,11 +19,7 @@ const body = Quicksand({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.hg-tiramisu.store"),
-  openGraph: {
-    type: "website",
-    locale: "vi_VN",
-    siteName: "Tiramisu Hg",
-  },
+  openGraph: baseOpenGraph,
   twitter: {
     card: "summary_large_image",
   },
