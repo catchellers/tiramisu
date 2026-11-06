@@ -19,6 +19,13 @@
   color-scheme: light;
 }
 
+/* AOS fade-left/right dịch phần tử ra ngoài màn hình trước khi animate → chặn scroll ngang.
+   Dùng clip (không phải hidden) để header sticky vẫn chạy. */
+html,
+body {
+  overflow-x: clip;
+}
+
 html {
   scroll-behavior: smooth;
 }
