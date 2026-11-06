@@ -38,7 +38,7 @@ export default function Home() {
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-12 sm:px-6 md:grid-cols-2 md:pt-16">
           <div>
             <span className="hero-in inline-flex items-center gap-2 rounded-full border-2 border-bubble bg-white px-4 py-1.5 text-sm font-bold text-berry">
-              <span className="animate-wiggle inline-block">🧋</span> Mới: Lục trà sữa xoài đào
+              <span className="animate-wiggle inline-block">🧋</span> Mới: Lục trà sữa xoài
             </span>
             <h1 className="hero-in hero-d1 mt-6 font-display text-5xl font-extrabold leading-[1.05] text-cocoa sm:text-6xl lg:text-7xl">
               Ngọt ngào
@@ -145,10 +145,10 @@ export default function Home() {
           <p className="font-display text-lg font-bold text-candy">✿ Menu của tiệm ✿</p>
           <h2 className="mt-1 font-display text-4xl font-extrabold text-cocoa sm:text-5xl">Chọn món bạn thương</h2>
           <p className="mx-auto mt-3 max-w-lg text-cocoa-soft">
-            Tiramisu vẫn là “nhân vật chính”, giờ có thêm bạn trà sữa xoài đào đi kèm cho đủ cặp nè 🧋
+            Tiramisu vẫn là “nhân vật chính”, giờ có thêm trà sữa xoài và thái xanh đi kèm cho đủ bộ nè 🧋
           </p>
         </div>
-        <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p, i) => (
             <div key={p.slug} data-aos="zoom-in-up" data-aos-delay={i * 120}>
               <ProductCard product={p} />
@@ -170,7 +170,7 @@ export default function Home() {
                 sizes="(min-width: 768px) 260px, 65vw"
               />
               <Polaroid
-                photo={{ src: kitchenFridge, alt: "Tiramisu và trà sữa xoài đào đang được để lạnh trong tủ" }}
+                photo={{ src: kitchenFridge, alt: "Tiramisu và trà sữa xoài đang được để lạnh trong tủ" }}
                 aspect="aspect-[4/3]"
                 caption="Đang chờ kem set 🧊"
                 parallax={-0.05}

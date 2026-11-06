@@ -17,12 +17,21 @@ const body = Quicksand({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.hg-tiramisu.store"),
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    siteName: "Tiramisu Hg",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
   title: {
     default: "Tiramisu Hg · Tiramisu nhà làm Quận 7",
     template: "%s · Tiramisu Hg",
   },
   description:
-    "Tiramisu Hg (H.G House) — tiramisu nhà làm và lục trà sữa xoài đào ở Tân Hưng, Quận 7. Tiramisu 45k/hộp, freeship dưới 3km.",
+    "Tiramisu Hg (H.G House) — tiramisu nhà làm, lục trà sữa xoài và trà sữa thái xanh ở Tân Hưng, Quận 7. Tiramisu 45k/hộp, freeship dưới 3km.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

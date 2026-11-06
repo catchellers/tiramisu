@@ -4,6 +4,7 @@ import tiramisuOreoTop from "@/public/images/tiramisu-oreo-top.jpg";
 import tiramisuLayers from "@/public/images/tiramisu-layers.jpg";
 import kitchenFridge from "@/public/images/kitchen-fridge.jpg";
 import milkTea from "@/public/images/milk-tea-xoai-dao.jpg";
+import thaiGreenTea from "@/public/images/milk-tea-thai-xanh.jpg";
 
 export type Photo = {
   src: StaticImageData;
@@ -46,8 +47,8 @@ export const shop = {
 
 export const gallery: Photo[] = [
   { src: tiramisuOreoSide, alt: "Hộp tiramisu nhiều lớp kem, trên mặt có nửa bánh Oreo và bông hoa nhỏ" },
-  { src: kitchenFridge, alt: "Tiramisu và chai trà sữa xoài đào xếp trong tủ lạnh" },
-  { src: milkTea, alt: "Chai lục trà sữa xoài đào" },
+  { src: kitchenFridge, alt: "Tiramisu và chai trà sữa xoài xếp trong tủ lạnh" },
+  { src: milkTea, alt: "Chai lục trà sữa xoài" },
   { src: tiramisuOreoTop, alt: "Mặt trên tiramisu phủ cacao, cắm nửa bánh Oreo" },
 ];
 
@@ -86,22 +87,22 @@ export const products: Product[] = [
   },
   {
     slug: "luc-tra-sua-xoai-dao",
-    name: "Lục trà sữa xoài đào",
-    short: "Trà sữa xoài đào",
+    name: "Lục trà sữa xoài",
+    short: "Trà sữa xoài",
     unit: "chai",
-    tagline: "Lục trà thanh mát, xoài đào thơm lừng, kèm trân châu đen",
+    tagline: "Lục trà thanh mát, xoài thơm lừng, kèm trân châu đen",
     description: [
-      "Lục trà pha đậm vừa, uống thanh và không chát, hoà cùng sữa béo nhẹ. Xoài đào được cho dọc theo thành chai nên vừa đẹp mắt vừa thơm vị trái cây.",
-      "Mỗi chai đã kèm sẵn trân châu đen dẻo dai. Đóng chai nắp vặn tiện mang đi, lắc đều trước khi uống để vị trà, sữa và xoài đào hoà quyện nha.",
+      "Lục trà pha đậm vừa, uống thanh và không chát, hoà cùng sữa béo nhẹ. Xoài được cho dọc theo thành chai nên vừa đẹp mắt vừa thơm vị trái cây.",
+      "Mỗi chai đã kèm sẵn trân châu đen dẻo dai. Đóng chai nắp vặn tiện mang đi, lắc đều trước khi uống để vị trà, sữa và xoài hoà quyện nha.",
     ],
     options: [{ id: "chai", label: "1 chai", note: "Kèm trân châu đen", price: 25000 }],
     badge: "Mới",
     bg: "#FFF0C7",
     photos: [
-      { src: milkTea, alt: "Chai lục trà sữa xoài đào" },
-      { src: kitchenFridge, alt: "Chai trà sữa xoài đào để lạnh cạnh những hộp tiramisu" },
+      { src: milkTea, alt: "Chai lục trà sữa xoài" },
+      { src: kitchenFridge, alt: "Chai trà sữa xoài để lạnh cạnh những hộp tiramisu" },
     ],
-    ingredients: ["Lục trà", "Sữa", "Xoài", "Đào", "Trân châu đen"],
+    ingredients: ["Lục trà", "Sữa", "Xoài", "Trân châu đen"],
     taste: [
       { label: "Ngọt", value: 3 },
       { label: "Thơm trà", value: 4 },
@@ -110,8 +111,34 @@ export const products: Product[] = [
     storage: "Bảo quản lạnh, ngon nhất khi uống trong ngày.",
     ownerNote: [
       "Món mới toanh của tiệm nè 🧋 Nền là lục trà nên uống thanh, không bị chát, sữa béo vừa vừa chứ không ngậy.",
-      "Xoài đào được cho dọc theo thành chai, lắc nhẹ cái là ra màu vàng cam nhìn mê ghê. 25k mà có luôn trân châu đen nhai dẻo dẻo, khỏi phải gọi thêm topping 😋",
+      "Xoài được cho dọc theo thành chai, lắc nhẹ cái là ra màu vàng cam nhìn mê ghê. 25k mà có luôn trân châu đen nhai dẻo dẻo, khỏi phải gọi thêm topping 😋",
       "Uống lạnh là chuẩn bài, mà làm thêm 1 hộp tiramisu nữa thì buổi chiều coi như được chữa lành 😌",
+    ],
+  },
+  {
+    slug: "tra-sua-thai-xanh",
+    name: "Trà sữa thái xanh",
+    short: "Thái xanh",
+    unit: "chai",
+    tagline: "Trà thái xanh thơm dịu, sữa béo mịn, màu xanh mát mắt",
+    description: [
+      "Trà thái xanh pha đậm vị, hoà cùng sữa béo vừa phải nên uống mượt và thơm. Màu xanh lá nhạt nhìn đã thấy mát.",
+      "Đóng chai nắp vặn tiện mang đi, lắc đều và uống lạnh là ngon nhất nha.",
+    ],
+    options: [{ id: "chai", label: "1 chai", note: "Chai nắp vặn", price: 25000 }],
+    badge: "Mới",
+    bg: "#E6F4D7",
+    photos: [{ src: thaiGreenTea, alt: "Chai trà sữa thái xanh màu xanh lá nhạt" }],
+    ingredients: ["Trà thái xanh", "Sữa"],
+    taste: [
+      { label: "Ngọt", value: 3 },
+      { label: "Thơm trà", value: 4 },
+      { label: "Béo", value: 3 },
+    ],
+    storage: "Bảo quản lạnh, ngon nhất khi uống trong ngày.",
+    ownerNote: [
+      "Thêm một bạn mới vào hội nè 💚 Thái xanh thơm mùi trà rất riêng, sữa béo vừa vừa nên uống hoài không ngán.",
+      "Màu xanh này là màu tự nhiên của trà thái xanh đó, lắc lên nhìn mát rượi. Uống kèm tiramisu là combo xinh xắn luôn 😌",
     ],
   },
 ];
