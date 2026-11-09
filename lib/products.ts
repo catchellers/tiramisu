@@ -5,6 +5,8 @@ import tiramisuLayers from "@/public/images/tiramisu-layers.jpg";
 import kitchenFridge from "@/public/images/kitchen-fridge.jpg";
 import milkTea from "@/public/images/milk-tea-xoai-dao.jpg";
 import thaiGreenTea from "@/public/images/milk-tea-thai-xanh.jpg";
+import pannaCottaChanhLeo from "@/public/images/panna-cotta-chanh-leo.jpg";
+import pannaCottaKiwi from "@/public/images/panna-cotta-kiwi.jpg";
 
 export type Photo = {
   src: StaticImageData;
@@ -139,6 +141,38 @@ export const products: Product[] = [
     ownerNote: [
       "Thêm một bạn mới vào hội nè 💚 Thái xanh thơm mùi trà rất riêng, sữa béo vừa vừa nên uống hoài không ngán.",
       "Màu xanh này là màu tự nhiên của trà thái xanh đó, lắc lên nhìn mát rượi. Uống kèm tiramisu là combo xinh xắn luôn 😌",
+    ],
+  },
+  {
+    slug: "panna-cotta",
+    name: "Panna cotta trái cây",
+    short: "Panna cotta",
+    unit: "hộp",
+    tagline: "Mềm mướt, mát lạnh, phủ sốt chanh leo hoặc kiwi",
+    description: [
+      "Lớp panna cotta sữa trắng mịn, mềm rung rinh, bên trên phủ một lớp sốt trái cây tươi chua chua ngọt ngọt — ăn mát lạnh cực kỳ dễ chịu.",
+      "Có 2 vị cho bạn chọn: chanh leo thơm lừng, lấm tấm hạt đen giòn giòn, hoặc kiwi xanh mướt có cả miếng kiwi nhai sần sật. Đựng hộp nhựa nắp gập nhỏ xinh, tiện mang đi.",
+    ],
+    options: [
+      { id: "chanh-leo", label: "Vị chanh leo", note: "Sốt chanh leo có hạt", price: 8000 },
+      { id: "kiwi", label: "Vị kiwi", note: "Sốt kiwi có miếng kiwi", price: 8000 },
+    ],
+    badge: "Mới",
+    bg: "#FFF3D6",
+    photos: [
+      { src: pannaCottaChanhLeo, alt: "Hai hộp panna cotta vị chanh leo phủ sốt vàng cam lấm tấm hạt đen trên khay gỗ" },
+      { src: pannaCottaKiwi, alt: "Hai hộp panna cotta vị kiwi phủ sốt xanh lá có miếng kiwi trên khay gỗ" },
+    ],
+    ingredients: ["Sữa tươi", "Whipping cream", "Chanh leo", "Kiwi"],
+    taste: [
+      { label: "Ngọt", value: 3 },
+      { label: "Chua thanh", value: 3 },
+      { label: "Mềm mịn", value: 5 },
+    ],
+    storage: "Bảo quản ngăn mát tủ lạnh, ăn lạnh là ngon nhất.",
+    ownerNote: [
+      "Bé mới nhỏ xíu mà giá cũng nhỏ xíu nè, 8k một hộp thôi 🥰 Panna cotta mềm rung rinh, múc một muỗng là tan trong miệng luôn.",
+      "Vị chanh leo chua chua thơm thơm, hạt giòn giòn vui miệng. Vị kiwi thì xanh mát, có cả miếng kiwi nhai sần sật. Phân vân quá thì lấy mỗi vị một hộp cho chắc 😆",
     ],
   },
 ];
